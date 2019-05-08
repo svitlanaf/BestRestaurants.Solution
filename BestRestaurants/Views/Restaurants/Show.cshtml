@@ -1,0 +1,20 @@
+@using BestRestaurants.Models;
+
+<h1>@Model.GetName()</h1>
+<p>@Model.GetAddress()</p>
+
+<h3>Reviews for this Restaurant</h3>
+@if(Model.GetReviews().Count < 1)
+{
+    <p>There are no reviews to display!</p>
+}
+else
+{
+    <ul>
+        @foreach(Review review in Model.GetReviews())
+        {
+            <li>@review.GetReviewText()</li>
+        }
+    </ul>
+}
+<a href="/cuisines/@Model.GetCuisineId()/restaurants/@Model.GetId()/reviews/new">Add a new review for this restaurant...</a>

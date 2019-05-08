@@ -38,6 +38,22 @@ namespace BestRestaurants.Controllers
           return View(myCuisine);
       }
 
+        [HttpGet("/cuisines/{id}/edit")]
+        public ActionResult Edit(int id)
+        {
+        Cuisine editCuisine = Cuisine.Find(id);
+        return View(editCuisine);
+        }
+
+        [ActionName("Edit"), HttpPost("/cuisines/edit/{id}")]
+        public ActionResult Update(int id, string name, string description)
+        {
+        Cuisine thisCuisine = Cuisine.Find(id);
+        thisCuisine.EditName(name);
+        thisCuisine.EditDescription(description);
+        return RedirectToAction("Show", thisCuisine);
+        }
+
   }
 
 }

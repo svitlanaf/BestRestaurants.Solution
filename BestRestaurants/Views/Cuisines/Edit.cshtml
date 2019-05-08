@@ -1,0 +1,7 @@
+<form action="/cuisines/edit/@Model.GetId()" method="post">
+ <label for="name">Cuisine Name:</label>
+ <input required id="name" name="name" type="text" value="@Model.GetName()"><br>
+ <label for="description">Description:</label>
+ <input required id="description" name="description" type="text" value="@Model.GetDescription()"><br>
+ <button type="submit">Save Cuisine</button>
+</form>

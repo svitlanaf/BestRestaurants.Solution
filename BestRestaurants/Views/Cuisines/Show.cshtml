@@ -3,6 +3,8 @@
 <h1>@Model.GetName() Food</h1>
 <p>@Model.GetDescription()</p>
 
+<a href="/cuisines/@Model.GetId()/edit">Edit</a>
+
 <h3>Restaurants Serving This Cuisine</h3>
 @if(Model.GetRestaurants().Count < 1)
 {
@@ -13,7 +15,7 @@ else
     <ul>
         @foreach(Restaurant restaurant in Model.GetRestaurants())
         {
-            <li>@restaurant.GetName()</li>
+            <li><a href="/cuisines/{cuisineId}/restaurants/@restaurant.GetId()">@restaurant.GetName()</a></li>
         }
     </ul>
 }

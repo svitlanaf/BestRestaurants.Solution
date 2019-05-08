@@ -78,7 +78,7 @@ namespace BestRestaurants.Models
             string restaurantName = rdr.GetString(2);
             string restaurantAddress = rdr.GetString(3);
             
-            Restaurant newRestaurant = new Restaurant(restaurantName, restaurantAddress, restaurantId, restaurantCuisineId);
+            Restaurant newRestaurant = new Restaurant(restaurantName, restaurantAddress, restaurantCuisineId, restaurantId);
             allRestaurants.Add(newRestaurant);
         }
         conn.Close();
@@ -200,13 +200,13 @@ namespace BestRestaurants.Models
         MySqlConnection conn = DB.Connection();
         conn.Open();
         var cmd = conn.CreateCommand() as MySqlCommand;
-        cmd.CommandText = @"UPDATE cuisines SET name = @newName WHERE id = @searchId;";
+        cmd.CommandText = @"UPDATE cuisines SET description = @newDescription WHERE id = @searchId;";
         MySqlParameter searchId = new MySqlParameter();
         searchId.ParameterName = "@searchId";
         searchId.Value = _id;
         cmd.Parameters.Add(searchId);
         MySqlParameter description = new MySqlParameter();
-        description.ParameterName = "@newName";
+        description.ParameterName = "@newDescription";
         description.Value = newDescription;
         cmd.Parameters.Add(description);
         cmd.ExecuteNonQuery();
