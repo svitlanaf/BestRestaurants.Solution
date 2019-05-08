@@ -1,0 +1,20 @@
+@using BestRestaurants.Models;
+
+<h1>@Model.GetName() Food</h1>
+<p>@Model.GetDescription()</p>
+
+<h3>Restaurants Serving This Cuisine</h3>
+@if(Model.GetRestaurants().Count < 1)
+{
+    <p>There are no restaurants to display!</p>
+}
+else
+{
+    <ul>
+        @foreach(Restaurant restaurant in Model.GetRestaurants())
+        {
+            <li>@restaurant.GetName()</li>
+        }
+    </ul>
+}
+<a href="/cuisines/@Model.GetId()/restaurants/new">Add a new restaurant for this cuisine...</a>

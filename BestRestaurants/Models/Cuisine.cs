@@ -59,6 +59,36 @@ namespace BestRestaurants.Models
       return allCuisines;
     }
 
+    public List<Restaurant> GetRestaurants()
+    {
+        List<Restaurant> allRestaurants = new List<Restaurant>{};
+        MySqlConnection conn = DB.Connection();
+        conn.Open();
+        var cmd = conn.CreateCommand() as MySqlCommand;
+        cmd.CommandText = @"SELECT * FROM restaurants WHERE cuisine_id = @thisId;";
+        MySqlParameter thisId = new MySqlParameter();
+        thisId.ParameterName = "@thisId";
+        thisId.Value = _id;
+        cmd.Parameters.Add(thisId);
+        var rdr = cmd.ExecuteReader() as MySqlDataReader;
+        while(rdr.Read())
+        {
+            int restaurantId = rdr.GetInt32(0);
+            int restaurantCuisineId = rdr.GetInt32(1);
+            string restaurantName = rdr.GetString(2);
+            string restaurantAddress = rdr.GetString(3);
+            
+            Restaurant newRestaurant = new Restaurant(restaurantName, restaurantAddress, restaurantId, restaurantCuisineId);
+            allRestaurants.Add(newRestaurant);
+        }
+        conn.Close();
+        if (conn != null)
+        {
+            conn.Dispose();
+        }
+        return allRestaurants;
+    }
+
     public static void ClearAll()
     {
       MySqlConnection conn = DB.Connection();
@@ -78,7 +108,7 @@ namespace BestRestaurants.Models
       MySqlConnection conn = DB.Connection();
       conn.Open();
       var cmd = conn.CreateCommand() as MySqlCommand;
-      cmd.CommandText = @"SELECT * FROM `cuisines` WHERE id = @thisId;";
+      cmd.CommandText = @"SELECT * FROM cuisines WHERE id = @thisId;";
       MySqlParameter thisId = new MySqlParameter();
       thisId.ParameterName = "@thisId";
       thisId.Value = id;
@@ -87,8 +117,6 @@ namespace BestRestaurants.Models
       int cuisineId = 0;
       string cuisineName = "";
       string cuisineDescription = "";
-
-      
       while (rdr.Read())
       {
         cuisineId = rdr.GetInt32(0);

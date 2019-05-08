@@ -133,7 +133,7 @@ namespace BestRestaurants.Models
         MySqlConnection conn = DB.Connection();
         conn.Open();
         var cmd = conn.CreateCommand() as MySqlCommand;
-        cmd.CommandText = @"INSERT INTO restaurants (name, address, cuisineId) VALUES (@name, @address, @cuisine_id);";
+        cmd.CommandText = @"INSERT INTO restaurants (name, address, cuisine_id) VALUES (@name, @address, @cuisine_id);";
         MySqlParameter name = new MySqlParameter();
         name.ParameterName = "@name";
         name.Value = this._name;

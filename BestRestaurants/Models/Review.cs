@@ -124,7 +124,7 @@ namespace BestRestaurants.Models
         MySqlConnection conn = DB.Connection();
         conn.Open();
         var cmd = conn.CreateCommand() as MySqlCommand;
-        cmd.CommandText = @"INSERT INTO reviews (reviewText, restaurantId) VALUES (@review_text, @restaurant_id;";
+        cmd.CommandText = @"INSERT INTO reviews (review_text, restaurant_id) VALUES (@review_text, @restaurant_id;";
         MySqlParameter reviewText = new MySqlParameter();
         reviewText.ParameterName = "@review_text";
         reviewText.Value = this._reviewText;

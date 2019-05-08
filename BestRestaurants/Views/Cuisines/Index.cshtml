@@ -2,16 +2,19 @@
 @using System;
 @using System.Collections.Generic;
 
+<h1>Cuisines</h1>
+
 @if(Model.Count < 1)
 {
     <p>There are no cuisines to display!</p>
 }
 else
 {
+    <p>(Click for more information)</p>
     <ul>
         @foreach(Cuisine cuisine in Model)
         {
-            <li>@cuisine.GetName()</li>
+            <li><a href="/cuisines/@cuisine.GetId()">@cuisine.GetName()</li>
         }
     </ul>
 }

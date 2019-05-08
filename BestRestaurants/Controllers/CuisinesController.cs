@@ -31,6 +31,13 @@ namespace BestRestaurants.Controllers
           return RedirectToAction("Index");
       }
 
+      [HttpGet("/cuisines/{id}")]
+      public ActionResult Show(int id)
+      {
+          Cuisine myCuisine = Cuisine.Find(id);
+          return View(myCuisine);
+      }
+
   }
 
 }
