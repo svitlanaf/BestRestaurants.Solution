@@ -11,7 +11,7 @@ namespace BestRestaurants.Tests
     public void Dispose()
     {
       Cuisine.ClearAll();
-    //   Restaurant.ClearAll();
+      Restaurant.ClearAll();
     }
 
     public CuisineTest()
@@ -160,6 +160,27 @@ namespace BestRestaurants.Tests
       Assert.AreEqual(testId, result);
     }
 
+    [TestMethod]
+    public void Edit_UpdatesCuisineNameInDatabase_String()
+    {
+      Cuisine testCuisine = new Cuisine("Indian", "");
+      testCuisine.Save();
+      string secondName = "Russian";
+      testCuisine.EditName(secondName);
+      string result = Cuisine.Find(testCuisine.GetId()).GetName();
+      Assert.AreEqual(secondName, result);
+    }
+
+    [TestMethod]
+    public void Edit_UpdatesCuisineDescriptionInDatabase_String()
+    {
+      Cuisine testCuisine = new Cuisine("", "Very spicy.");
+      testCuisine.Save();
+      string secondDescription = "Very yummy!";
+      testCuisine.EditDescription(secondDescription);
+      string result = Cuisine.Find(testCuisine.GetId()).GetDescription();
+      Assert.AreEqual(secondDescription, result);
+    }
 
     }    
 }

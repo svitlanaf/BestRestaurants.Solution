@@ -143,5 +143,52 @@ namespace BestRestaurants.Models
          conn.Dispose();
        }
     }
+
+    public void EditName(string newName)
+        {
+        MySqlConnection conn = DB.Connection();
+        conn.Open();
+        var cmd = conn.CreateCommand() as MySqlCommand;
+        cmd.CommandText = @"UPDATE cuisines SET name = @newName WHERE id = @searchId;";
+        MySqlParameter searchId = new MySqlParameter();
+        searchId.ParameterName = "@searchId";
+        searchId.Value = _id;
+        cmd.Parameters.Add(searchId);
+        MySqlParameter name = new MySqlParameter();
+        name.ParameterName = "@newName";
+        name.Value = newName;
+        cmd.Parameters.Add(name);
+        cmd.ExecuteNonQuery();
+        _name = newName;
+        conn.Close();
+        if (conn != null)
+            {
+                conn.Dispose();
+            }
+        }
+
+        public void EditDescription(string newDescription)
+        {
+        MySqlConnection conn = DB.Connection();
+        conn.Open();
+        var cmd = conn.CreateCommand() as MySqlCommand;
+        cmd.CommandText = @"UPDATE cuisines SET name = @newName WHERE id = @searchId;";
+        MySqlParameter searchId = new MySqlParameter();
+        searchId.ParameterName = "@searchId";
+        searchId.Value = _id;
+        cmd.Parameters.Add(searchId);
+        MySqlParameter description = new MySqlParameter();
+        description.ParameterName = "@newName";
+        description.Value = newDescription;
+        cmd.Parameters.Add(description);
+        cmd.ExecuteNonQuery();
+        _description = newDescription;
+        conn.Close();
+        if (conn != null)
+            {
+                conn.Dispose();
+            }
+        }
+
   }
 }
