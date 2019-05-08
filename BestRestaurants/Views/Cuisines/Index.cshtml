@@ -1,0 +1,18 @@
+@using BestRestaurants.Models;
+@using System;
+@using System.Collections.Generic;
+
+@if(Model.Count < 1)
+{
+    <p>There are no cuisines to display!</p>
+}
+else
+{
+    <ul>
+        @foreach(Cuisine cuisine in Model)
+        {
+            <li>@cuisine.GetName()</li>
+        }
+    </ul>
+}
+<a href="/cuisines/new">Add a new cuisine...</a>
