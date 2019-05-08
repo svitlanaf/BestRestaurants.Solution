@@ -125,16 +125,39 @@ namespace BestRestaurants.Models
         conn.Open();
         var cmd = conn.CreateCommand() as MySqlCommand;
         cmd.CommandText = @"INSERT INTO reviews (reviewText, restaurantId) VALUES (@review_text, @restaurant_id;";
-        MySqlParameter name = new MySqlParameter();
+        MySqlParameter reviewText = new MySqlParameter();
         reviewText.ParameterName = "@review_text";
         reviewText.Value = this._reviewText;
         cmd.Parameters.Add(reviewText);
-        MySqlParameter cuisineId = new MySqlParameter();
+        MySqlParameter restaurantId = new MySqlParameter();
         restaurantId.ParameterName = "@restaurant_id";
         restaurantId.Value = this._restaurantId;
         cmd.Parameters.Add(restaurantId);
         cmd.ExecuteNonQuery();
         _id = (int) cmd.LastInsertedId;
+        conn.Close();
+        if (conn != null)
+            {
+                conn.Dispose();
+            }
+        }
+
+        public void Edit(string newReviewText)
+        {
+        MySqlConnection conn = DB.Connection();
+        conn.Open();
+        var cmd = conn.CreateCommand() as MySqlCommand;
+        cmd.CommandText = @"UPDATE reviews SET reviewText = @newReviewText WHERE id = @searchId;";
+        MySqlParameter searchId = new MySqlParameter();
+        searchId.ParameterName = "@searchId";
+        searchId.Value = _id;
+        cmd.Parameters.Add(searchId);
+        MySqlParameter reviewText = new MySqlParameter();
+        reviewText.ParameterName = "@newReviewText";
+        reviewText.Value = newReviewText;
+        cmd.Parameters.Add(reviewText);
+        cmd.ExecuteNonQuery();
+        _reviewText = newReviewText;
         conn.Close();
         if (conn != null)
             {
