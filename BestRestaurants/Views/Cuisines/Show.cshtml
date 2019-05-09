@@ -3,7 +3,14 @@
 <h1>@Model.GetName() Food</h1>
 <p>@Model.GetDescription()</p>
 
-<a href="/cuisines/@Model.GetId()/edit">Edit</a>
+<form method="get" action="/cuisines/@Model.GetId()/edit">
+    <button type="submit">Edit</button>
+</form>
+
+
+<form method="post" action="/cuisines/@Model.GetId()/delete">
+    <button type="submit">Delete</button>
+</form>
 
 <h3>Restaurants Serving This Cuisine</h3>
 @if(Model.GetRestaurants().Count < 1)

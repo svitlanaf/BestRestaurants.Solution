@@ -46,15 +46,30 @@ namespace BestRestaurants.Controllers
         return View(editRestaurant);
         }
 
-        [ActionName("Edit"), HttpPost("/cuisines/{cuisineId}/restaurants/{restaurantId}/edit/")]
+        [ActionName("Edit"), HttpPost("/cuisines/{cuisineId}/restaurants/{restaurantId}/edit")]
         public ActionResult Update(int restaurantId, int cuisineId, string name, string address)
         {
+        Console.WriteLine("you clicked edit");
         Restaurant thisRestaurant = Restaurant.Find(restaurantId);
         thisRestaurant.EditName(name);
         thisRestaurant.EditAddress(address);
         return RedirectToAction("Show", thisRestaurant);
         }
 
+
+        [ActionName("Destroy"), HttpPost("/cuisines/{cuisineId}/restaurants/{restaurantId}/delete")]
+        public ActionResult Destroy(int restaurantId)
+        {
+        Restaurant deleteRestaurant = Restaurant.Find(restaurantId);
+        List<Review> deleteReviews = deleteRestaurant.GetReviews();
+        foreach(Review review in deleteReviews)
+        {
+            review.Delete();
+        }
+
+        deleteRestaurant.Delete();
+        return RedirectToAction("Index");
+        }
 
   }
 

@@ -151,10 +151,12 @@ namespace BestRestaurants.Models
 
         public void Edit(string newReviewText)
         {
+            Console.WriteLine("EDITING");
+
         MySqlConnection conn = DB.Connection();
         conn.Open();
         var cmd = conn.CreateCommand() as MySqlCommand;
-        cmd.CommandText = @"UPDATE reviews SET reviewText = @newReviewText WHERE id = @searchId;";
+        cmd.CommandText = @"UPDATE reviews SET review_text = @newReviewText WHERE id = @searchId;";
         MySqlParameter searchId = new MySqlParameter();
         searchId.ParameterName = "@searchId";
         searchId.Value = _id;
@@ -171,5 +173,21 @@ namespace BestRestaurants.Models
                 conn.Dispose();
             }
         }
+
+        public void Delete()
+        {
+        MySqlConnection conn = DB.Connection();
+        conn.Open();
+        MySqlCommand cmd = new MySqlCommand("DELETE FROM reviews WHERE id = @ReviewId;", conn);
+        MySqlParameter reviewParameter = new MySqlParameter();
+        reviewParameter.ParameterName = "@ReviewId";
+        reviewParameter.Value = _id;
+        cmd.Parameters.Add(reviewParameter);
+        cmd.ExecuteNonQuery();
+        if (conn != null)
+            {
+            conn.Close();
+            }
+      }
   }
 }

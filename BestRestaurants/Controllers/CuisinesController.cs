@@ -54,6 +54,23 @@ namespace BestRestaurants.Controllers
         return RedirectToAction("Show", thisCuisine);
         }
 
+        [ActionName("Destroy"), HttpPost("/cuisines/{id}/delete")]
+        public ActionResult Destroy(int id)
+        {
+        Cuisine deleteCuisine = Cuisine.Find(id);
+        List<Restaurant> deleteRestaurants = deleteCuisine.GetRestaurants();
+        foreach(Restaurant restaurant in deleteRestaurants)
+        {
+            List<Review> deleteReviews = restaurant.GetReviews();
+            foreach(Review review in deleteReviews)
+            {
+                review.Delete();
+            }
+            restaurant.Delete();
+        }
+        deleteCuisine.Delete();
+        return RedirectToAction("Index");
+        }
   }
 
 }

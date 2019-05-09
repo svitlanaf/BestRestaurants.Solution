@@ -231,5 +231,21 @@ namespace BestRestaurants.Models
                 conn.Dispose();
             }
         }
+
+        public void Delete()
+        {
+        MySqlConnection conn = DB.Connection();
+        conn.Open();
+        MySqlCommand cmd = new MySqlCommand("DELETE FROM restaurants WHERE id = @RestaurantId;", conn);
+        MySqlParameter restaurantdParameter = new MySqlParameter();
+        restaurantdParameter.ParameterName = "@RestaurantId";
+        restaurantdParameter.Value = _id;
+        cmd.Parameters.Add(restaurantdParameter);
+        cmd.ExecuteNonQuery();
+        if (conn != null)
+            {
+            conn.Close();
+            }
+      }
     }
 }

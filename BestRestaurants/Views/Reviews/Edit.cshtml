@@ -1,9 +1,12 @@
-<!-- /cuisines/{cuisineId}/restaurants/{restaurantId}/reviews/{reviewId}/edit/ -->
+@using BestRestaurants.Models;
 
+@{int cuisineId = Restaurant.Find(@Model.GetRestaurantId()).GetCuisineId();}
 
-
-<form action="/cuisines/@Model.GetCuisineId()/restaurants/@Model.GetRestaurantId()/reviews/@Model.GetId()/edit" method="post">
+<form action="/cuisines/@cuisineId/restaurants/@Model.GetRestaurantId()/reviews/@Model.GetId()/edit" method="post">
  <label for="reviewText">Review:</label>
  <input required id="reviewText" name="reviewText" type="text" value="@Model.GetReviewText()"><br>
+
+ <input hidden value="@Model.GetId()" name="reviewId">
+ <input hidden value="@Model.GetRestaurantId()" name="reviewId">
  <button type="submit">Save Review</button>
 </form>

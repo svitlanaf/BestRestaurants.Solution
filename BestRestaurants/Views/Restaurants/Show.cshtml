@@ -4,7 +4,17 @@
 
 <h1>@Model.GetName()</h1>
 <p>@Model.GetAddress()</p>
-<a href="/cuisines/@Model.GetCuisineId()/restaurants/@Model.GetId()/edit">Edit</a>
+
+<!-- <a href="/cuisines/@Model.GetCuisineId()/restaurants/@Model.GetId()/edit">Edit</a> -->
+
+<form method="get" action="/cuisines/@Model.GetCuisineId()/restaurants/@Model.GetId()/edit">
+    <button type="submit">Edit</button>
+</form>
+
+
+<form method="post" action="/cuisines/@Model.GetCuisineId()/restaurants/@Model.GetId()/delete">
+    <button type="submit">Delete</button>
+</form>
 
 <h3>Reviews for this Restaurant</h3>
 @if(Model.GetReviews().Count < 1)
@@ -17,7 +27,15 @@ else
         @foreach(Review review in Model.GetReviews())
         {
             <li>@review.GetReviewText()</li>
-            <a href="/cuisines/@cuisineId/restaurants/@Model.GetId()/reviews/@review.GetId()/edit">Edit</a>
+            <!-- <a href="/cuisines/@cuisineId/restaurants/@Model.GetId()/reviews/@review.GetId()/edit">Edit</a> -->
+
+            <form method="get" action="/cuisines/@cuisineId/restaurants/@Model.GetId()/reviews/@review.GetId()/edit">
+                <button type="submit">Edit</button>
+            </form>
+
+            <form method="post" action="/cuisines/@cuisineId/restaurants/@Model.GetId()/reviews/@review.GetId()/delete">
+                <button type="submit">Delete</button>
+            </form>
         }
     </ul>
 }
