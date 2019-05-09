@@ -1,6 +1,10 @@
 @using BestRestaurants.Models;
 
-<h1>@Model.GetName() Food</h1>
+@{
+    Layout = "_Layout";
+}
+
+<h3>@Model.GetName() Food</h3>
 <p>@Model.GetDescription()</p>
 
 <form method="get" action="/cuisines/@Model.GetId()/edit">
@@ -12,7 +16,7 @@
     <button type="submit">Delete</button>
 </form>
 
-<h3>Restaurants Serving This Cuisine</h3>
+<h4>Restaurants Serving This Cuisine</h4>
 @if(Model.GetRestaurants().Count < 1)
 {
     <p>There are no restaurants to display!</p>

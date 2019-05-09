@@ -41,6 +41,50 @@ namespace BestRestaurants.Models
         return _cuisineId;
         }
 
+
+    //    USE JOINED TABLES!!!!!!
+    // public static List<Restaurant> SearchRestaurantAndReview(string searchPhrase)
+    // {
+    //   List<Restaurant> allRestaurants = Restaurant.GetAll();
+    //   List<Restaurant> searchResults = new List<Restaurant>{};
+    //   foreach(Restaurant restaurant in allRestaurants)
+    //   {
+    //       Console.WriteLine(searchPhrase.ToLower());
+    //       Console.WriteLine(restaurant.GetName().ToLower());
+    //       Console.WriteLine(restaurant.GetAddress().ToLower());
+
+    //     if(restaurant.GetName().ToLower().Contains(searchPhrase.ToLower()))
+    //     {
+    //         searchResults.Add(restaurant);
+    //     }
+    //     if(restaurant.GetAddress().ToLower().Contains(searchPhrase.ToLower()))
+    //     {
+    //         searchResults.Add(restaurant);
+    //     }
+
+    //     List<Review> allReviews = restaurant.GetReviews();
+    //     foreach (Review review in allReviews)
+    //     {
+    //         if(review.GetReviewText().ToLower().Contains(searchPhrase.ToLower()))
+    //         {
+    //             searchResults.Add(restaurant);
+    //         }
+    //     }
+
+    //     Cuisine thisCuisine = Cuisine.Find(restaurant.GetCuisineId());
+    //     if(thisCuisine.GetName().ToLower().Contains(searchPhrase.ToLower()))
+    //     {
+    //         searchResults.Add(restaurant);
+    //     }
+    //     if(thisCuisine.GetDescription().ToLower().Contains(searchPhrase.ToLower()))
+    //     {
+    //         searchResults.Add(restaurant);
+    //     }
+
+    //   }
+    //   return searchResults;
+    // }
+
          public static List<Restaurant> GetAll()
 
         {
@@ -244,9 +288,10 @@ namespace BestRestaurants.Models
         restaurantdParameter.Value = _id;
         cmd.Parameters.Add(restaurantdParameter);
         cmd.ExecuteNonQuery();
+        conn.Close();
         if (conn != null)
             {
-            conn.Close();
+            conn.Dispose();
             }
       }
     }

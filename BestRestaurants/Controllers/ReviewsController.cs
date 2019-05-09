@@ -56,11 +56,11 @@ namespace BestRestaurants.Controllers
         }
 
         [ActionName("Destroy"), HttpPost("/cuisines/{cuisineId}/restaurants/{restaurantId}/reviews/{reviewId}/delete")]
-        public ActionResult Destroy(int reviewId)
+        public ActionResult Destroy(int reviewId, int restaurantId)
         {
         Review deleteReview = Review.Find(reviewId);
         deleteReview.Delete();
-        return RedirectToAction("Index");
+        return RedirectToAction("Show", "Restaurants", restaurantId);
         }
 
   }

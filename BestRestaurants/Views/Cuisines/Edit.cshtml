@@ -1,3 +1,6 @@
+@{
+    Layout = "_Layout";
+}
 <form action="/cuisines/@Model.GetId()/edit" method="post">
  <label for="name">Cuisine Name:</label>
  <input required id="name" name="name" type="text" value="@Model.GetName()"><br>

@@ -71,6 +71,19 @@ namespace BestRestaurants.Controllers
         return RedirectToAction("Index");
         }
 
+        // [HttpPost("/search")]
+        // public ActionResult Search(string search)
+        // {
+        //     List<Restaurant> searchResults = Restaurant.SearchRestaurantAndReview(search);
+        //     return RedirectToAction("SearchResults", searchResults);
+        // }
+
+        // [HttpGet("/search")]
+        // public ActionResult SearchResults(List<Restaurant> results)
+        // {
+        //     return View(results);
+        // }
+
   }
 
 }
