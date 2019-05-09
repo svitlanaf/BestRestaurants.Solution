@@ -32,6 +32,21 @@ namespace BestRestaurants.Controllers
           return RedirectToAction("Show", "Restaurants", restaurantId);
       }
 
+    [HttpGet("/cuisines/{cuisineId}/restaurants/{restaurantId}/reviews/{reviewId}/edit")]
+        public ActionResult Edit(int reviewId, int restaurantId, int cuisineId)
+        {
+        Review editReview = Review.Find(reviewId);
+
+        return View(editReview);
+        }
+
+        [ActionName("Edit"), HttpPost("/cuisines/{cuisineId}/restaurants/{restaurantId}/reviews/{reviewId}/edit/")]
+        public ActionResult Update(int reviewId, int restaurantId, int cuisineId, string reviewText)
+        {
+        Review thisReview = Review.Find(reviewId);
+        thisReview.Edit(reviewText);
+        return RedirectToAction("Show", "Restaurants", restaurantId);
+        }
 
   }
 }

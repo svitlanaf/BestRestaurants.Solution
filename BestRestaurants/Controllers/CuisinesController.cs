@@ -45,7 +45,7 @@ namespace BestRestaurants.Controllers
         return View(editCuisine);
         }
 
-        [ActionName("Edit"), HttpPost("/cuisines/edit/{id}")]
+        [ActionName("Edit"), HttpPost("/cuisines/{id}/edit")]
         public ActionResult Update(int id, string name, string description)
         {
         Cuisine thisCuisine = Cuisine.Find(id);

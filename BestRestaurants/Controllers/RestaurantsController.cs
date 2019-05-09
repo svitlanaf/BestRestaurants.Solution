@@ -32,11 +32,29 @@ namespace BestRestaurants.Controllers
       }
 
       [HttpGet("/cuisines/{cuisineId}/restaurants/{restaurantId}")]
-      public ActionResult Show(int restaurantId)
+      public ActionResult Show(int restaurantId, int cuisineId)
       {
           Restaurant myRestaurant = Restaurant.Find(restaurantId);
           return View(myRestaurant);
       }
+
+      [HttpGet("/cuisines/{cuisineId}/restaurants/{restaurantId}/edit")]
+        public ActionResult Edit(int restaurantId, int cuisineId)
+        {
+        Restaurant editRestaurant = Restaurant.Find(restaurantId);
+       
+        return View(editRestaurant);
+        }
+
+        [ActionName("Edit"), HttpPost("/cuisines/{cuisineId}/restaurants/{restaurantId}/edit/")]
+        public ActionResult Update(int restaurantId, int cuisineId, string name, string address)
+        {
+        Restaurant thisRestaurant = Restaurant.Find(restaurantId);
+        thisRestaurant.EditName(name);
+        thisRestaurant.EditAddress(address);
+        return RedirectToAction("Show", thisRestaurant);
+        }
+
 
   }
 

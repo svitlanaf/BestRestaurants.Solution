@@ -1,0 +1,9 @@
+<!-- /cuisines/{cuisineId}/restaurants/{restaurantId}/reviews/{reviewId}/edit/ -->
+
+
+
+<form action="/cuisines/@Model.GetCuisineId()/restaurants/@Model.GetRestaurantId()/reviews/@Model.GetId()/edit" method="post">
+ <label for="reviewText">Review:</label>
+ <input required id="reviewText" name="reviewText" type="text" value="@Model.GetReviewText()"><br>
+ <button type="submit">Save Review</button>
+</form>

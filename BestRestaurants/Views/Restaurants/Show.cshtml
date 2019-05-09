@@ -1,7 +1,10 @@
 @using BestRestaurants.Models;
 
+@{int cuisineId = Model.GetCuisineId();}
+
 <h1>@Model.GetName()</h1>
 <p>@Model.GetAddress()</p>
+<a href="/cuisines/@Model.GetCuisineId()/restaurants/@Model.GetId()/edit">Edit</a>
 
 <h3>Reviews for this Restaurant</h3>
 @if(Model.GetReviews().Count < 1)
@@ -14,6 +17,7 @@ else
         @foreach(Review review in Model.GetReviews())
         {
             <li>@review.GetReviewText()</li>
+            <a href="/cuisines/@cuisineId/restaurants/@Model.GetId()/reviews/@review.GetId()/edit">Edit</a>
         }
     </ul>
 }

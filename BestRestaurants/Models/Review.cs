@@ -9,11 +9,13 @@ namespace BestRestaurants.Models
       private string _reviewText;
       private int _id;
       private int _restaurantId;
+    //   private int _cuisineId;
   
-        public Review(string reviewText, int restaurantId, int id = 0)
+        public Review(string reviewText,  int restaurantId, int id = 0) //int cuisineId,
         {
             _reviewText = reviewText;
             _restaurantId = restaurantId;
+            // _cuisineId = cuisineId;
             _id = id;
         }
 
@@ -32,6 +34,11 @@ namespace BestRestaurants.Models
             {
             return _restaurantId;
             }
+
+        // public int GetCuisineId()
+        // {
+        // return _cuisineId;
+        // }
 
         public static void ClearAll()
         {
