@@ -36,6 +36,8 @@ namespace BestRestaurants.Models
 
         public int GetCuisineId()
         {
+            Console.WriteLine("cuisine id" + _cuisineId);
+            Console.WriteLine("restaurant id " + _id);
         return _cuisineId;
         }
 

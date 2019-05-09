@@ -35,10 +35,12 @@ namespace BestRestaurants.Models
             return _restaurantId;
             }
 
-        // public int GetCuisineId()
-        // {
-        // return _cuisineId;
-        // }
+        public int GetCuisineId()
+        {
+        Restaurant myRestaurant = Restaurant.Find(_restaurantId);
+        Console.WriteLine("hi " + myRestaurant.GetCuisineId().ToString());
+        return myRestaurant.GetCuisineId();
+        }
 
         public static void ClearAll()
         {
@@ -69,7 +71,7 @@ namespace BestRestaurants.Models
             int restaurantId = rdr.GetInt32(1);
             string reviewText = rdr.GetString(2);
             
-            Review newReview = new Review(reviewText, reviewId, restaurantId);
+            Review newReview = new Review(reviewText, restaurantId, reviewId);
             allReviews.Add(newReview);
         }
         conn.Close();
@@ -85,7 +87,7 @@ namespace BestRestaurants.Models
         MySqlConnection conn = DB.Connection();
         conn.Open();
         var cmd = conn.CreateCommand() as MySqlCommand;
-        cmd.CommandText = @"SELECT * FROM reviews WHERE id = (@searchId);";
+        cmd.CommandText = @"SELECT * FROM reviews WHERE id = @searchId;";
         MySqlParameter searchId = new MySqlParameter();
         searchId.ParameterName = "@searchId";
         searchId.Value = id;
@@ -100,7 +102,7 @@ namespace BestRestaurants.Models
             restaurantId = rdr.GetInt32(1);
             reviewText = rdr.GetString(2);
         }
-        Review newReview = new Review(reviewText, reviewId, restaurantId);
+        Review newReview = new Review(reviewText, restaurantId, reviewId);
         conn.Close();
         if (conn != null)
             {

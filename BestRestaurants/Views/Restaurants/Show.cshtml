@@ -1,7 +1,5 @@
 @using BestRestaurants.Models;
 
-@{int cuisineId = Model.GetCuisineId();}
-
 <h1>@Model.GetName()</h1>
 <p>@Model.GetAddress()</p>
 
@@ -27,13 +25,12 @@ else
         @foreach(Review review in Model.GetReviews())
         {
             <li>@review.GetReviewText()</li>
-            <!-- <a href="/cuisines/@cuisineId/restaurants/@Model.GetId()/reviews/@review.GetId()/edit">Edit</a> -->
 
-            <form method="get" action="/cuisines/@cuisineId/restaurants/@Model.GetId()/reviews/@review.GetId()/edit">
+            <form method="get" action="/cuisines/@review.GetCuisineId()/restaurants/@review.GetRestaurantId()/reviews/@review.GetId()/edit">
                 <button type="submit">Edit</button>
             </form>
 
-            <form method="post" action="/cuisines/@cuisineId/restaurants/@Model.GetId()/reviews/@review.GetId()/delete">
+            <form method="post" action="/cuisines/@review.GetCuisineId()/restaurants/@review.GetRestaurantId()/reviews/@review.GetId()/delete">
                 <button type="submit">Delete</button>
             </form>
         }

@@ -22,7 +22,7 @@ else
     <ul>
         @foreach(Restaurant restaurant in Model.GetRestaurants())
         {
-            <li><a href="/cuisines/{cuisineId}/restaurants/@restaurant.GetId()">@restaurant.GetName()</a></li>
+            <li><a href="/cuisines/@restaurant.GetCuisineId()/restaurants/@restaurant.GetId()">@restaurant.GetName()</a></li>
         }
     </ul>
 }
